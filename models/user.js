@@ -13,6 +13,11 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
+        level: {
+            type: DataTypes.BIGINT,
+            allowNull: false,
+            defaultValue: 1
+        },
         experience: {
             type: DataTypes.BIGINT,
             allowNull: false,
