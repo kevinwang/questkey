@@ -6,7 +6,7 @@ var _ = require('underscore');
 var sequelize = new Sequelize(
     null, null, null,
     {
-        storage: __dirname + '/store/app.sqlite',
+        storage: __dirname + '/../store/app.sqlite',
         dialect: 'sqlite'
     }
 );
