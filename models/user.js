@@ -23,6 +23,16 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             defaultValue: 0
         }
+    }, {
+        instanceMethods: {
+            /**
+             * Experience formula taken from HabitRPG
+             * http://habitrpg.wikia.com/wiki/Experience_Points
+             */
+            getExperienceForLevel: function() {
+                return Math.round((0.25 * Math.pow(this.level, 2) + 10 * this.level + 139.75) / 10) * 10;
+            }
+        }
     });
     return User;
 };
