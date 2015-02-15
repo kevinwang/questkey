@@ -1,24 +1,23 @@
-html
-    head
-        title QuestKey
-    body
-        h1 Welcome back, #{user.username}!
-        h2 Level #{user.level}
-        h2 #{user.experience} / #{user.getExperienceForLevel()} XP
-        a(href="/reward_me") Give me more experience!
+extends ./layout.jade
 
-        h2 Quests
-        if quests.length > 0
-            ul
-                each quest in quests
-                    li= quest.title
-        else
-            p You have not started any quests.
+block content
+    h1 Welcome back, #{user.username}!
+    h2 Level #{user.level}
+    h2 #{user.experience} / #{user.getExperienceForLevel()} XP
+    a(href="/reward_me") Give me more experience!
 
-        h2 Quests You Own
-        if ownedQuests.length > 0
-            ul
-                each quest in ownedQuests
-                    li= quest.title
-        else
-            p You are not the owner of any quests.
+    h2 Quests
+    if quests.length > 0
+        ul
+            each quest in quests
+                li= quest.title
+    else
+        p You have not started any quests.
+
+    h2 Quests You Own
+    if ownedQuests.length > 0
+        ul
+            each quest in ownedQuests
+                li= quest.title
+    else
+        p You are not the owner of any quests.

@@ -22,6 +22,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', function(req, res) {
+    if (req.isAuthenticated()) return res.redirect('/home');
     res.render('index');
 });
 
@@ -34,6 +35,11 @@ app.post('/login', passport.authenticate('login', {
     successRedirect: '/home',
     failureRedirect: '/login'
 }));
+
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
 
 app.get('/home', ensureAuthenticated, function(req, res) {
     async.parallel({

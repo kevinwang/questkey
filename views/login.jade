@@ -1,9 +1,8 @@
-html
-    head
-        title QuestKey
-    body
-        h1 Login
-        form(name="login", action="/login", method="post")
-            input(type="text", name="username")
-            input(type="password", name="password")
-            input(type="submit", value="Login")
+extends ./layout.jade
+
+block content
+    h1 Login
+    form(name="login", action="/login", method="post")
+        input(type="text", name="username")
+        input(type="password", name="password")
+        input(type="submit", value="Login")

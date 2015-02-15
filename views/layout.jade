@@ -1,0 +1,10 @@
+doctype html
+html
+    head
+        title QuestKey
+    body
+        if user
+            a(href="/logout") Logout
+        else
+            a(href="login") Login
+        block content
