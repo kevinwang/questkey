@@ -13,20 +13,23 @@ block content
     li
       a(href=theUser.path + "/reward/100") [Admin] Give user 100 experience
 
-  h2 Quests
-  if quests.length > 0
-    ul
-      each quest in quests
-        li
-          a(href=quest.path)= quest.title
-  else
-    p #{theUser.username} has not started any quests.
+  div(class="row")
+    div(class="col-md-6")
+      h2 Quests
+      if quests.length > 0
+        ul
+          each quest in quests
+            li
+              a(href=quest.path)= quest.title
+      else
+        p #{theUser.username} has not started any quests.
 
-  h2 Quests You Own
-  if ownedQuests.length > 0
-    ul
-      each quest in ownedQuests
-        li
-          a(href=quest.path)= quest.title
-  else
-    p #{theUser.username} is not the owner of any quests.
+    div(class="col-md-6")
+      h2 Quests #{theUser.username} Owns
+      if ownedQuests.length > 0
+        ul
+          each quest in ownedQuests
+            li
+              a(href=quest.path)= quest.title
+      else
+        p #{theUser.username} is not the owner of any quests.
