@@ -31,6 +31,8 @@ passport.use('signup', new LocalStrategy({
             })
             .then(function(user) {
                 done(null, user);
+            }, function() {
+                done(null, false);
             });
         });
     });
