@@ -83,12 +83,38 @@ app.get('/quests/:id', function(req, res) {
     .then(function(quest) {
         if (!quest) return res.redirect('/');
         quest.getOwner().then(function(owner) {
-            res.render('quest', {
-                user: req.user,
-                quest: quest,
-                owner: owner,
-                isUserOwner: req.user && req.user.id === quest.Owner.id
+            quest.hasUser(req.user)
+            .then(function(isUserInQuest) {
+                res.render('quest', {
+                    user: req.user,
+                    quest: quest,
+                    owner: owner,
+                    isUserOwner: req.user && req.user.id === quest.Owner.id,
+                    isUserInQuest: isUserInQuest
+                });
             });
+        });
+    });
+});
+
+app.get('/quests/:id/join', ensureAuthenticated, function(req, res) {
+    db.Quest.find({
+        where: {id: req.params.id}
+    })
+    .then(function(quest) {
+        quest.addUser(req.user).then(function() {
+            res.redirect(quest.path);
+        });
+    });
+});
+
+app.get('/quests/:id/leave', ensureAuthenticated, function(req, res) {
+    db.Quest.find({
+        where: {id: req.params.id}
+    })
+    .then(function(quest) {
+        quest.removeUser(req.user).then(function() {
+            res.redirect(quest.path);
         });
     });
 });

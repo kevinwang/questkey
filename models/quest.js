@@ -46,6 +46,18 @@ module.exports = function(sequelize, DataTypes) {
              */
             cancelPath: function() {
                 return this.path + '/cancel';
+            },
+            /**
+             * Return path to join quest.
+             */
+            joinPath: function() {
+                return this.path + '/join';
+            },
+            /**
+             * Return path to leave quest.
+             */
+            leavePath: function() {
+                return this.path + '/leave';
             }
         }
     });
