@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 var bcrypt = require('bcrypt');
+var async = require('async');
 
 var db = require('./models');
 var passport = require('./authentication');
@@ -36,7 +37,24 @@ app.post('/login', passport.authenticate('login', {
 }));
 
 app.get('/home', ensureAuthenticated, function(req, res) {
-    res.render('home', {user: req.user});
+    async.parallel({
+        ownedQuests: function(callback) {
+            req.user.getOwnedQuests().then(function(ownedQuests) {
+                callback(null, ownedQuests);
+            });
+        },
+        quests: function(callback) {
+            req.user.getQuests().then(function(quests) {
+                callback(null, quests);
+            });
+        }
+    }, function(err, results) {
+        res.render('home', {
+            user: req.user,
+            ownedQuests: results.ownedQuests,
+            quests: results.quests
+        });
+    });
 });
 
 app.get('/reward_me', ensureAuthenticated, function(req, res) {
@@ -65,6 +83,16 @@ db.sequelize.sync({force: true})
             })
             .then(function(quest) {
                 quest.setOwner(user);
+                bcrypt.hash('password', 10, function(err, hash) {
+                    db.User.create({
+                        username: 'shan',
+                        password: hash,
+                        email: 'shan@theytookmydomain.net'
+                    })
+                    .then(function(user) {
+                        quest.addUser(user);
+                    });
+                });
             });
         });
     });
