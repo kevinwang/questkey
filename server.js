@@ -75,6 +75,27 @@ app.get('/quests', function(req, res) {
     });
 });
 
+app.post('/quests', ensureAuthenticated, function(req, res) {
+    if (isNaN(parseInt(req.body.reward))) res.redirect('/quests/new');
+    db.Quest.create({
+        title: req.body.title,
+        description: req.body.description,
+        location: req.body.location,
+        reward: parseInt(req.body.reward)
+    })
+    .then(function(quest) {
+        quest.setOwner(req.user).then(function() {
+            res.redirect(quest.path);
+        });
+    });
+});
+
+app.get('/quests/new', ensureAuthenticated, function(req, res) {
+    res.render('newquest', {
+        user: req.user
+    });
+});
+
 app.get('/quests/:id', function(req, res) {
     db.Quest.find({
         where: {id: req.params.id},

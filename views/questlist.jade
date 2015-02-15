@@ -7,6 +7,8 @@ block questsNavItem
 block content
   h1 Quests
 
+  a(class="btn btn-primary", href="/quests/new") New Quest
+
   each quest in quests
     div
         a(href=quest.path)= quest.title
