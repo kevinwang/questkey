@@ -67,6 +67,18 @@ app.get('/reward_me', ensureAuthenticated, function(req, res) {
     res.redirect('/home');
 });
 
+app.get('/quests/:id', function(req, res) {
+    db.Quest.find({
+        where: {id: req.params.id}
+    })
+    .then(function(quest) {
+        res.render('quest', {
+            user: req.user,
+            quest: quest
+        });
+    });
+});
+
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) return next();
     return res.redirect('/login');

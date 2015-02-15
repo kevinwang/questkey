@@ -18,6 +18,14 @@ module.exports = function(sequelize, DataTypes) {
                 Quest.belongsTo(models.User, {as: 'Owner', foreignKey: 'OwnerId'});
                 Quest.belongsToMany(models.User, {through: 'UsersQuests'});
             }
+        },
+        instanceMethods: {
+            /**
+             * Returns path to quest page.
+             */
+            getPath: function() {
+                return '/quests/' + this.id;
+            }
         }
     });
     return Quest;

@@ -10,7 +10,8 @@ block content
     if quests.length > 0
         ul
             each quest in quests
-                li= quest.title
+                li
+                    a(href=quest.getPath())= quest.title
     else
         p You have not started any quests.
 
@@ -18,6 +19,7 @@ block content
     if ownedQuests.length > 0
         ul
             each quest in ownedQuests
-                li= quest.title
+                li
+                    a(href=quest.getPath())= quest.title
     else
         p You are not the owner of any quests.
