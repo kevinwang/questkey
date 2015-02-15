@@ -20,19 +20,45 @@ block content
     div(class="col-md-6")
       h2 Quests
       if quests.length > 0
-        ul
-          each quest in quests
-            li
-              a(href=quest.path)= quest.title
+        each quest in quests
+          div
+            a(href=quest.path)= quest.title
+            ul
+              li
+                | Reward: 
+                | 
+                span(class="label label-warning") #{quest.reward} XP
+              li
+                | Status:
+                | 
+                if quest.status === 'in progress'
+                  span(class="label label-warning") In progress
+                else if quest.status === 'done'
+                  span(class="label label-success") Done
+                else if quest.status === 'canceled'
+                  span(class="label label-danger") Canceled
       else
         p #{theUser.username} has not started any quests.
 
     div(class="col-md-6")
       h2 Quests #{theUser.username} Owns
       if ownedQuests.length > 0
-        ul
-          each quest in ownedQuests
-            li
-              a(href=quest.path)= quest.title
+        each quest in ownedQuests
+          div
+            a(href=quest.path)= quest.title
+            ul
+              li
+                | Reward: 
+                | 
+                span(class="label label-warning") #{quest.reward} XP
+              li
+                | Status:
+                | 
+                if quest.status === 'in progress'
+                  span(class="label label-warning") In progress
+                else if quest.status === 'done'
+                  span(class="label label-success") Done
+                else if quest.status === 'canceled'
+                  span(class="label label-danger") Canceled
       else
         p #{theUser.username} is not the owner of any quests.
