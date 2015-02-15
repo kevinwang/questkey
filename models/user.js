@@ -24,6 +24,12 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: 0
         }
     }, {
+        classMethods: {
+            associate: function(models) {
+                User.hasMany(models.Quest, {as: 'OwnedQuests'});
+                User.belongsToMany(models.Quest, {through: 'UsersQuests'});
+            }
+        },
         instanceMethods: {
             /**
              * Experience formula taken from HabitRPG
