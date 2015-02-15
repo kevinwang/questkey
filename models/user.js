@@ -38,24 +38,28 @@ module.exports = function(sequelize, DataTypes) {
             },
             avatarUrl: function() {
                 return 'http://www.gravatar.com/avatar/' + crypto.createHash('md5').update(this.getDataValue('email')).digest('hex');
-            }
-        },
-        instanceMethods: {
+            },
             /**
              * Experience formula taken from HabitRPG
              * http://habitrpg.wikia.com/wiki/Experience_Points
              */
-            getExperienceForLevel: function() {
-                return Math.round((0.25 * Math.pow(this.level, 2) + 10 * this.level + 139.75) / 10) * 10;
+            experienceForLevel: function() {
+                var level = this.getDataValue('level');
+                return Math.round((0.25 * Math.pow(level, 2) + 10 * level + 139.75) / 10) * 10;
             },
+            experiencePercentage: function() {
+                return 100.0 * this.getDataValue('experience') / this.experienceForLevel;
+            }
+        },
+        instanceMethods: {
             /**
              * Increase experience by `amount` XP.
              * Level up if necessary.
              */
             increaseExperience: function(amount) {
                 this.experience += amount;
-                while (this.experience >= this.getExperienceForLevel()) {
-                    this.experience -= this.getExperienceForLevel();
+                while (this.experience >= this.experienceForLevel) {
+                    this.experience -= this.experienceForLevel;
                     this.level++;
                 }
                 this.save();

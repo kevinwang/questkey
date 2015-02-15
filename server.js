@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 var async = require('async');
+var path = require('path');
 
 var db = require('./models');
 var passport = require('./authentication');
@@ -137,6 +138,10 @@ app.get('/u/:username/reward', ensureAuthenticated, function(req, res) {
         user.increaseExperience(50);
         res.redirect(user.path);
     });
+});
+
+app.get('/css/:filename', function(req, res) {
+    res.sendFile(path.join(__dirname, 'css', req.params.filename));
 });
 
 function ensureAuthenticated(req, res, next) {

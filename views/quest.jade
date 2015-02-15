@@ -1,18 +1,19 @@
 extends ./layout.jade
 
 block content
-  h1= quest.title
+  h1 Quest: #{quest.title}
   a(href=owner.path)
     img(src=owner.avatarUrl)
-  h2
+  h4
     span Owner:
     | 
     a(href=owner.path) #{owner.username} (Level #{owner.level})
-  p= quest.description
   ul
     li Location: #{quest.location}
     li Reward: #{quest.reward} XP
     li Status: #{quest.statusText}
+  h2 Description
+  p= quest.description
 
   h2 Adventurers
   ul

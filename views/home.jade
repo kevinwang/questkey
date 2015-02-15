@@ -8,7 +8,9 @@ block content
   h1 Welcome back, #{user.username}!
   img(src=user.avatarUrl)
   h2 Level #{user.level}
-  h2 #{user.experience} / #{user.getExperienceForLevel()} XP
+  div(class="progress")
+    div(class="progress-bar progress-bar-warning", role="progressbar", aria-valuenow=user.experience, aria=valuemin="0", aria-valuemax=user.experienceForLevel, style="width: " + user.experiencePercentage + "%")
+      span #{user.experience} / #{user.experienceForLevel} XP
 
   a(href=user.path) View your profile
 

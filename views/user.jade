@@ -4,7 +4,9 @@ block content
   h1= theUser.username
   img(src=theUser.avatarUrl)
   h2 Level #{theUser.level}
-  h2 #{theUser.experience} / #{theUser.getExperienceForLevel()} XP
+  div(class="progress")
+    div(class="progress-bar progress-bar-warning", role="progressbar", aria-valuenow=theUser.experience, aria=valuemin="0", aria-valuemax=theUser.experienceForLevel, style="width: " + theUser.experiencePercentage + "%")
+      span #{theUser.experience} / #{theUser.experienceForLevel} XP
   a(href=theUser.path + "/reward") [Admin] Give user 50 experience
 
   h2 Quests
