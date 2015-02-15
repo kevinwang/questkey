@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Quest.belongsTo(models.User, {as: 'Owner'});
+                Quest.belongsTo(models.User, {as: 'Owner', foreignKey: 'OwnerId'});
                 Quest.belongsToMany(models.User, {through: 'UsersQuests'});
             }
         }
