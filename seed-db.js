@@ -30,6 +30,16 @@ module.exports = function() {
                         quest.addUser(user);
                     });
                 });
+                bcrypt.hash('password', 10, function(err, hash) {
+                    db.User.create({
+                        username: 'eric',
+                        password: hash,
+                        email: 'ericc6134@gmail.com'
+                    })
+                    .then(function(user) {
+                        quest.addUser(user);
+                    });
+                });
             });
         });
     });
