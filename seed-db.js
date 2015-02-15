@@ -14,7 +14,7 @@ module.exports = function() {
         .then(function(user) {
             db.Quest.create({
                 title: 'Make me a sandwich',
-                description: 'Sudo make me a sandwich',
+                description: "Selfies master cleanse retro single-origin coffee flexitarian +1 PBR&B. Pork belly pop-up occupy raw denim, bespoke next level yr leggings pug taxidermy artisan. Tousled plaid master cleanse locavore, mlkshk migas keffiyeh Kickstarter quinoa tattooed. Next level vegan iPhone, direct trade sustainable sartorial health goth migas post-ironic asymmetrical umami. Williamsburg four loko post-ironic, cornhole lomo authentic twee. Before they sold out trust fund you probably haven't heard of them, vinyl ennui vegan jean shorts artisan. Roof party food truck dreamcatcher, Helvetica beard Intelligentsia craft beer tofu scenester.",
                 location: 'Cooper Union',
                 reward: 250
             })
