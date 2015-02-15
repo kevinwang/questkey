@@ -69,12 +69,39 @@ app.get('/reward_me', ensureAuthenticated, function(req, res) {
 
 app.get('/quests/:id', function(req, res) {
     db.Quest.find({
+        where: {id: req.params.id},
+        include: [{model: db.User, as: 'Owner'}, db.User]
+    })
+    .then(function(quest) {
+        if (!quest) return res.redirect('/');
+        quest.getOwner().then(function(owner) {
+            res.render('quest', {
+                user: req.user,
+                quest: quest,
+                owner: owner,
+                isUserOwner: req.user && req.user.id === quest.Owner.id
+            });
+        });
+    });
+});
+
+app.get('/quests/:id/end', function(req, res) {
+    db.Quest.find({
         where: {id: req.params.id}
     })
     .then(function(quest) {
-        res.render('quest', {
-            user: req.user,
-            quest: quest
+        if (!quest) return res.redirect('/');
+        if (quest.status !== 'in progress') return res.redirect(quest.path);
+        quest.getUsers().then(function(users) {
+            async.each(users, function(user, callback) {
+                user.increaseExperience(quest.reward);
+                callback();
+            }, function(err) {
+                quest.updateAttributes({status: 'done'})
+                .then(function() {
+                    res.redirect(quest.path);
+                });
+            });
         });
     });
 });

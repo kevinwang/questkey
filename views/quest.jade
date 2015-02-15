@@ -2,6 +2,20 @@ extends ./layout.jade
 
 block content
     h1= quest.title
+    img(src=owner.avatarUrl)
+    h2 Owner: #{owner.username}
     p= quest.description
     p Location: #{quest.location}
     p Reward: #{quest.reward} XP
+    p Status: #{quest.statusText}
+
+    h2 Adventurers
+    ul
+      each user in quest.Users
+        li
+          div
+            img(src=user.avatarUrl)
+            div= user.username
+
+    if isUserOwner && quest.status === 'in progress'
+        a(href=quest.endPath) End quest and reward adventurers

@@ -2,6 +2,7 @@ extends ./layout.jade
 
 block content
     h1 Welcome back, #{user.username}!
+    img(src=user.avatarUrl)
     h2 Level #{user.level}
     h2 #{user.experience} / #{user.getExperienceForLevel()} XP
     a(href="/reward_me") Give me more experience!
@@ -11,7 +12,7 @@ block content
         ul
             each quest in quests
                 li
-                    a(href=quest.getPath())= quest.title
+                    a(href=quest.path)= quest.title
     else
         p You have not started any quests.
 
@@ -20,6 +21,6 @@ block content
         ul
             each quest in ownedQuests
                 li
-                    a(href=quest.getPath())= quest.title
+                    a(href=quest.path)= quest.title
     else
         p You are not the owner of any quests.

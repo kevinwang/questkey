@@ -15,6 +15,11 @@ module.exports = function(sequelize, DataTypes) {
         reward: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        status: {
+            type: DataTypes.ENUM('in progress', 'done', 'canceled'),
+            allowNull: false,
+            defaultValue: 'in progress'
         }
     }, {
         classMethods: {
@@ -23,12 +28,28 @@ module.exports = function(sequelize, DataTypes) {
                 Quest.belongsToMany(models.User, {through: 'UsersQuests'});
             }
         },
-        instanceMethods: {
+        getterMethods: {
             /**
-             * Returns path to quest page.
+             * Return path to quest page.
              */
-            getPath: function() {
-                return '/quests/' + this.id;
+            path: function() {
+                return '/quests/' + this.getDataValue('id');
+            },
+            /**
+             * Return path to mark quest as complete.
+             */
+            endPath: function() {
+                return this.path + '/end';
+            },
+            /**
+             * Return status text for a given status.
+             */
+            statusText: function() {
+                return {
+                    'in progress': 'In progress',
+                    'done': 'Done',
+                    'canceled': 'Canceled'
+                }[this.getDataValue('status')];
             }
         }
     });
