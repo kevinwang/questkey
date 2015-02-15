@@ -31,6 +31,18 @@ module.exports = function(sequelize, DataTypes) {
              */
             getExperienceForLevel: function() {
                 return Math.round((0.25 * Math.pow(this.level, 2) + 10 * this.level + 139.75) / 10) * 10;
+            },
+            /**
+             * Increase experience by `amount` XP.
+             * Level up if necessary.
+             */
+            increaseExperience: function(amount) {
+                this.experience += amount;
+                while (this.experience >= this.getExperienceForLevel()) {
+                    this.experience -= this.getExperienceForLevel();
+                    this.level++;
+                }
+                this.save();
             }
         }
     });

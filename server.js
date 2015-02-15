@@ -39,6 +39,11 @@ app.get('/home', ensureAuthenticated, function(req, res) {
     res.render('home', {user: req.user});
 });
 
+app.get('/reward_me', ensureAuthenticated, function(req, res) {
+    req.user.increaseExperience(50);
+    res.redirect('/home');
+});
+
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) return next();
     return res.redirect('/login');
