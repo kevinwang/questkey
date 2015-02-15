@@ -14,8 +14,9 @@ block content
     each user in quest.Users
       li
         div
-          img(src=user.avatarUrl)
-          div= user.username
+          a(href=user.path)
+            img(src=user.avatarUrl, style="padding-right: 10px")
+          a(href=user.path)= user.username
 
   if isUserOwner && quest.status === 'in progress'
       a(href=quest.endPath) End quest and reward adventurers

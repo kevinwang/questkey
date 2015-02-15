@@ -5,7 +5,8 @@ block content
   img(src=user.avatarUrl)
   h2 Level #{user.level}
   h2 #{user.experience} / #{user.getExperienceForLevel()} XP
-  a(href="/reward_me") Give me more experience!
+
+  a(href=user.path) View your profile
 
   h2 Quests
   if quests.length > 0

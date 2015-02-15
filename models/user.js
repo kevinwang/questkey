@@ -33,6 +33,9 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         getterMethods: {
+            path: function() {
+                return '/u/' + this.getDataValue('username');
+            },
             avatarUrl: function() {
                 return 'http://www.gravatar.com/avatar/' + crypto.createHash('md5').update(this.getDataValue('email')).digest('hex');
             }

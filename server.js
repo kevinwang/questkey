@@ -62,11 +62,6 @@ app.get('/home', ensureAuthenticated, function(req, res) {
     });
 });
 
-app.get('/reward_me', ensureAuthenticated, function(req, res) {
-    req.user.increaseExperience(50);
-    res.redirect('/home');
-});
-
 app.get('/quests/:id', function(req, res) {
     db.Quest.find({
         where: {id: req.params.id},
@@ -103,6 +98,44 @@ app.get('/quests/:id/end', function(req, res) {
                 });
             });
         });
+    });
+});
+
+app.get('/u/:username', function(req, res) {
+    db.User.find({
+        where: {username: req.params.username}
+    })
+    .then(function(theUser) {
+        if (!theUser) return res.redirect('/');
+        async.parallel({
+            ownedQuests: function(callback) {
+                theUser.getOwnedQuests().then(function(ownedQuests) {
+                    callback(null, ownedQuests);
+                });
+            },
+            quests: function(callback) {
+                theUser.getQuests().then(function(quests) {
+                    callback(null, quests);
+                });
+            }
+        }, function(err, results) {
+            res.render('user', {
+                user: req.user, // Currently logged-in user
+                theUser: theUser,  // User for the page being rendered
+                ownedQuests: results.ownedQuests,
+                quests: results.quests
+            });
+        });
+    });
+});
+
+app.get('/u/:username/reward', ensureAuthenticated, function(req, res) {
+    db.User.find({
+        where: {username: req.params.username}
+    })
+    .then(function(user) {
+        user.increaseExperience(50);
+        res.redirect(user.path);
     });
 });
 
