@@ -1,9 +1,22 @@
-ul
-  if user
-    li
-      a(href="/home") Home
-    li
-      a(href="/logout") Logout
-  else
-    li
-      a(href="/login") Login
+nav(class="navbar navbar-default navbar-static-top")
+  div(class="container")
+    div(class="navbar-header")
+      button(type="button", class="navbar-toggle collapsed", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
+        span(class="sr-only") Toggle navigation
+        span(class="icon-bar")
+        span(class="icon-bar")
+        span(class="icon-bar")
+      a(class="navbar-brand", href="/") QuestKey
+    div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+      if user
+        ul(class="nav navbar-nav")
+          block homeNavItem
+            li
+              a(href="/home") Home
+      ul(class="nav navbar-nav navbar-right")
+        if user
+          li
+            a(href="/logout") Logout
+        else
+          li
+            a(href="/login") Login

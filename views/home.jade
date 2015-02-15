@@ -1,5 +1,9 @@
 extends ./layout.jade
 
+block homeNavItem
+  li(class="active")
+    a(href="/home") Home
+
 block content
   h1 Welcome back, #{user.username}!
   img(src=user.avatarUrl)
