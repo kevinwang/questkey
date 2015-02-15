@@ -36,10 +36,11 @@ block content
               a(href=user.path)
                 img(src=user.avatarUrl, style="padding-right: 10px")
               a(href=user.path) #{user.username} (Level #{user.level})
-      if isUserInQuest
-        a(class="btn btn-danger", href=quest.leavePath) Leave this quest
-      else if user
-        a(class="btn btn-primary", href=quest.joinPath) Join this quest
+      if !isUserOwner
+        if isUserInQuest
+          a(class="btn btn-danger", href=quest.leavePath) Leave this quest
+        else if user
+          a(class="btn btn-primary", href=quest.joinPath) Join this quest
 
     if isUserOwner
       div(class="col-md-6")
