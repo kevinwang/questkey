@@ -14,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
         },
         reward: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {min: 0, max: 9000}
         },
         status: {
             type: DataTypes.ENUM('in progress', 'done', 'canceled'),

@@ -87,6 +87,8 @@ app.post('/quests', ensureAuthenticated, function(req, res) {
         quest.setOwner(req.user).then(function() {
             res.redirect(quest.path);
         });
+    }, function() {
+        res.redirect('/quests/new');
     });
 });
 
