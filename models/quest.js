@@ -40,16 +40,6 @@ module.exports = function(sequelize, DataTypes) {
              */
             endPath: function() {
                 return this.path + '/end';
-            },
-            /**
-             * Return status text for a given status.
-             */
-            statusText: function() {
-                return {
-                    'in progress': 'In progress',
-                    'done': 'Done',
-                    'canceled': 'Canceled'
-                }[this.getDataValue('status')];
             }
         }
     });

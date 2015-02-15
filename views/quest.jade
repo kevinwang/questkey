@@ -10,8 +10,19 @@ block content
     a(href=owner.path) #{owner.username} (Level #{owner.level})
   ul
     li Location: #{quest.location}
-    li Reward: #{quest.reward} XP
-    li Status: #{quest.statusText}
+    li
+      | Reward:
+      | 
+      span(class="label label-warning") #{quest.reward} XP
+    li
+      | Status:
+      | 
+      if quest.status === 'in progress'
+        span(class="label label-warning") In progress
+      else if quest.status === 'done'
+        span(class="label label-success") Done
+      else if quest.status === 'canceled'
+        span(class="label label-danger") Canceled
   h2 Description
   p= quest.description
 
