@@ -6,16 +6,16 @@ block content
       h1 New Quest
       form(name="quest", action="/quests", method="post")
         div(class="form-group")
-            label(for="title") Title
-            input(type="text", class="form-control", name="title", autofocus)
+          label(for="title") Title
+          input(type="text", class="form-control", name="title", autofocus)
         div(class="form-group")
           label(for="description") Description
           textarea(class="form-control", name="description")
         div(class="form-group")
           label(for="location") Location
-          input(type="text", class="form-control", name="location", autofocus)
+          input(type="text", class="form-control", name="location")
         div(class="form-group")
           label(for="reward") Reward (XP)
-          input(type="text", class="form-control", name="reward", autofocus)
+          input(type="text", class="form-control", name="reward")
         div(class="form-group")
           input(type="submit", class="btn btn-default", value="Submit")
