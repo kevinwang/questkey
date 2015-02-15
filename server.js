@@ -63,6 +63,18 @@ app.get('/home', ensureAuthenticated, function(req, res) {
     });
 });
 
+app.get('/quests', function(req, res) {
+    db.Quest.findAll({
+        include: [{model: db.User, as: 'Owner'}]
+    })
+    .then(function(quests) {
+        res.render('questlist', {
+            user: req.user,
+            quests: quests
+        });
+    });
+});
+
 app.get('/quests/:id', function(req, res) {
     db.Quest.find({
         where: {id: req.params.id},

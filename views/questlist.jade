@@ -1,0 +1,30 @@
+extends ./layout.jade
+
+block questsNavItem
+  li(class="active")
+    a(href="/quests") Quests
+
+block content
+  h1 Quests
+
+  each quest in quests
+    div
+        a(href=quest.path)= quest.title
+      ul
+        li
+          | Owner:
+          | 
+          a(href=quest.Owner.path) #{quest.Owner.username}
+        li
+          | Reward: 
+          | 
+          span(class="label label-warning") #{quest.reward} XP
+        li
+          | Status:
+          | 
+          if quest.status === 'in progress'
+            span(class="label label-warning") In progress
+          else if quest.status === 'done'
+            span(class="label label-success") Done
+          else if quest.status === 'canceled'
+            span(class="label label-danger") Canceled
