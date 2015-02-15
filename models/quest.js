@@ -38,8 +38,8 @@ module.exports = function(sequelize, DataTypes) {
             /**
              * Return path to mark quest as complete.
              */
-            endPath: function() {
-                return this.path + '/end';
+            completePath: function() {
+                return this.path + '/complete';
             },
             /**
              * Return path to cancel quest.

@@ -42,7 +42,7 @@ block content
         h2 Quest Owner Actions
         if quest.status === 'in progress'
           p
-            a(class="btn btn-success", href=quest.endPath) End quest and reward adventurers
+            a(class="btn btn-success", href=quest.completePath) Complete quest and reward adventurers
           p
             a(class="btn btn-danger", href=quest.cancelPath) Cancel quest
         else

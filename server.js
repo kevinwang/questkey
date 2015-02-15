@@ -93,7 +93,7 @@ app.get('/quests/:id', function(req, res) {
     });
 });
 
-app.get('/quests/:id/end', function(req, res) {
+app.get('/quests/:id/complete', function(req, res) {
     db.Quest.find({
         where: {id: req.params.id}
     })
