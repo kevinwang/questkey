@@ -56,6 +56,16 @@ db.sequelize.sync({force: true})
             username: 'kevin',
             password: hash,
             email: 'kevin@kevinwang.com'
+        })
+        .then(function(user) {
+            db.Quest.create({
+                title: 'Make me a sandwich',
+                description: 'Sudo make me a sandwich',
+                location: 'Cooper Union'
+            })
+            .then(function(quest) {
+                quest.setOwner(user);
+            });
         });
     });
     app.listen(4000);
