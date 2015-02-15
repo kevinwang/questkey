@@ -14,12 +14,12 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         level: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 1
         },
         experience: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
         }
