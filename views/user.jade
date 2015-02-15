@@ -3,11 +3,15 @@ extends ./layout.jade
 block content
   h1= theUser.username
   img(src=theUser.avatarUrl)
-  h2 Level #{theUser.level}
+  h2 Level #{theUser.level} (#{theUser.title})
   div(class="progress")
     div(class="progress-bar progress-bar-warning", role="progressbar", aria-valuenow=theUser.experience, aria=valuemin="0", aria-valuemax=theUser.experienceForLevel, style="width: " + theUser.experiencePercentage + "%")
       span #{theUser.experience} / #{theUser.experienceForLevel} XP
-  a(href=theUser.path + "/reward") [Admin] Give user 50 experience
+  ul
+    li
+      a(href=theUser.path + "/reward/50") [Admin] Give user 50 experience
+    li
+      a(href=theUser.path + "/reward/100") [Admin] Give user 100 experience
 
   h2 Quests
   if quests.length > 0

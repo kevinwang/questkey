@@ -130,12 +130,12 @@ app.get('/u/:username', function(req, res) {
     });
 });
 
-app.get('/u/:username/reward', ensureAuthenticated, function(req, res) {
+app.get('/u/:username/reward/:amount', ensureAuthenticated, function(req, res) {
     db.User.find({
         where: {username: req.params.username}
     })
     .then(function(user) {
-        user.increaseExperience(50);
+        user.increaseExperience(parseInt(req.params.amount));
         res.redirect(user.path);
     });
 });
