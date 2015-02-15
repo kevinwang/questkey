@@ -26,14 +26,24 @@ block content
   h2 Description
   p= quest.description
 
-  h2 Adventurers
-  ul
-    each user in quest.Users
-      li
-        div
-          a(href=user.path)
-            img(src=user.avatarUrl, style="padding-right: 10px")
-          a(href=user.path) #{user.username} (Level #{user.level})
+  div(class="row")
+    div(class="col-md-6")
+      h2 Adventurers
+      ul
+        each user in quest.Users
+          li
+            div
+              a(href=user.path)
+                img(src=user.avatarUrl, style="padding-right: 10px")
+              a(href=user.path) #{user.username} (Level #{user.level})
 
-  if isUserOwner && quest.status === 'in progress'
-      a(href=quest.endPath) End quest and reward adventurers
+    if isUserOwner
+      div(class="col-md-6")
+        h2 Quest Owner Actions
+        if quest.status === 'in progress'
+          p
+            a(class="btn btn-success", href=quest.endPath) End quest and reward adventurers
+          p
+            a(class="btn btn-danger", href=quest.cancelPath) Cancel quest
+        else
+          p No actions available.

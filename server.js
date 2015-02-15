@@ -114,6 +114,20 @@ app.get('/quests/:id/end', function(req, res) {
     });
 });
 
+app.get('/quests/:id/cancel', function(req, res) {
+    db.Quest.find({
+        where: {id: req.params.id}
+    })
+    .then(function(quest) {
+        if (!quest) return res.redirect('/');
+        if (quest.status !== 'in progress') return res.redirect(quest.path);
+        quest.updateAttributes({status: 'canceled'})
+        .then(function() {
+            res.redirect(quest.path);
+        });
+    });
+});
+
 app.get('/u/:username', function(req, res) {
     db.User.find({
         where: {username: req.params.username}

@@ -40,6 +40,12 @@ module.exports = function(sequelize, DataTypes) {
              */
             endPath: function() {
                 return this.path + '/end';
+            },
+            /**
+             * Return path to cancel quest.
+             */
+            cancelPath: function() {
+                return this.path + '/cancel';
             }
         }
     });
