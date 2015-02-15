@@ -21,7 +21,9 @@ nav(class="navbar navbar-default navbar-static-top")
           li
             a(href="/logout") Logout
         else
-          li
-            a(href="/login") Login
-          li
-            a(href="/signup") Sign up
+          block loginNavItem
+            li
+              a(href="/login") Login
+          block signupNavItem
+            li
+              a(href="/signup") Sign up
