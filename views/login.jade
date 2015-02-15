@@ -1,8 +1,14 @@
 extends ./layout.jade
 
 block content
-  h1 Login
-  form(name="login", action="/login", method="post")
-    input(type="text", name="username")
-    input(type="password", name="password")
-    input(type="submit", value="Login")
+  div(class="col-md-offset-4 col-md-4")
+    h1 Login
+    form(name="login", action="/login", method="post")
+      div(class="form-group")
+        label(for="username") Username
+        input(type="text", class="form-control", name="username", autofocus)
+      div(class="form-group")
+        label(for="password") Password
+        input(type="password", class="form-control", name="password")
+      div(class="form-group")
+        input(type="submit", class="btn btn-default", value="Login")
