@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
-var bcrypt = require('bcrypt');
 var async = require('async');
 
 var db = require('./models');
@@ -69,33 +68,7 @@ function ensureAuthenticated(req, res, next) {
 
 db.sequelize.sync({force: true})
 .then(function(err) {
-    bcrypt.hash('password', 10, function(err, hash) {
-        db.User.create({
-            username: 'kevin',
-            password: hash,
-            email: 'kevin@kevinwang.com'
-        })
-        .then(function(user) {
-            db.Quest.create({
-                title: 'Make me a sandwich',
-                description: 'Sudo make me a sandwich',
-                location: 'Cooper Union'
-            })
-            .then(function(quest) {
-                quest.setOwner(user);
-                bcrypt.hash('password', 10, function(err, hash) {
-                    db.User.create({
-                        username: 'shan',
-                        password: hash,
-                        email: 'shan@theytookmydomain.net'
-                    })
-                    .then(function(user) {
-                        quest.addUser(user);
-                    });
-                });
-            });
-        });
-    });
+    require('./seed-db')();
     app.listen(4000);
 })
 .catch(function(err) {
