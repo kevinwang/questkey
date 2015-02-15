@@ -1,12 +1,15 @@
 extends ./layout.jade
 
 block content
-  h1= theUser.username
-  img(src=theUser.avatarUrl)
-  h2 Level #{theUser.level} (#{theUser.title})
-  div(class="progress")
-    div(class="progress-bar progress-bar-warning", role="progressbar", aria-valuenow=theUser.experience, aria=valuemin="0", aria-valuemax=theUser.experienceForLevel, style="width: " + theUser.experiencePercentage + "%")
-      span #{theUser.experience} / #{theUser.experienceForLevel} XP
+  div(class="row")
+    div(class="col-md-1", style="text-align: center")
+      img(src=theUser.avatarUrl)
+    div(class="col-md-11")
+      h4(style="margin-top: 0px") #{theUser.username}
+      p(style="font-weight: bold") Level #{theUser.level} (#{theUser.title})
+      div(class="progress")
+        div(class="progress-bar progress-bar-warning", role="progressbar", aria-valuenow=theUser.experience, aria=valuemin="0", aria-valuemax=theUser.experienceForLevel, style="width: " + theUser.experiencePercentage + "%")
+          span #{theUser.experience} / #{theUser.experienceForLevel} XP
   ul
     li
       a(href=theUser.path + "/reward/50") [Admin] Give user 50 experience
