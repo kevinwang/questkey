@@ -39,6 +39,9 @@ module.exports = function(sequelize, DataTypes) {
                 return '/u/' + this.getDataValue('username');
             },
             avatarUrl: function() {
+                if (this.title === 'Bill Gates') {
+                    return 'http://s3.timetoast.com/public/uploads/photos/2124010/bill-gates-ms_medium_square.jpg';
+                }
                 return 'http://www.gravatar.com/avatar/' + crypto.createHash('md5').update(this.getDataValue('email')).digest('hex');
             },
             /**
@@ -56,9 +59,13 @@ module.exports = function(sequelize, DataTypes) {
                 var level = this.getDataValue('level');
                 if (level === 1) return 'Beginner';
                 else if (level < 5) return 'Slight Boon to Society';
-                else if (level < 10) return 'All Around Nice Guy';
-                else if (level < 15) return 'Quest Bridge Over Troubled Waters';
-                else return 'Stand-Up Guy';
+                else if (level < 10) return 'I Would Trust This Guy with Something';
+                else if (level < 15) return 'All Around Nice Guy';
+                else if (level < 20) return 'Quest Bridge Over Troubled Waters';
+                else if (level < 25) return 'Stand-Up Guy';
+                else if (level < 30) return 'Bill Gates';
+                else if (level < 35) return 'Melinda Gates';
+                else return 'Gandhi';
             }
         },
         instanceMethods: {
