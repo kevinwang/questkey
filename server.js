@@ -37,6 +37,16 @@ app.post('/login', passport.authenticate('login', {
     failureRedirect: '/login'
 }));
 
+app.get('/signup', function(req, res) {
+    if (req.isAuthenticated()) return res.redirect('/home');
+    res.render('signup');
+});
+
+app.post('/signup', passport.authenticate('signup', {
+    successRedirect: '/home',
+    failureRedirect: '/signup'
+}));
+
 app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');

@@ -16,6 +16,26 @@ passport.use('login', new LocalStrategy(function(username, password, done) {
     });
 }));
 
+passport.use('signup', new LocalStrategy({
+    passReqToCallback: true
+}, function(req, username, password, done) {
+    db.User.find({
+        where: {username: username}
+    })
+    .then(function(user) {
+        bcrypt.hash(password, 10, function(err, hash) {
+            db.User.create({
+                username: username,
+                password: hash,
+                email: req.body.email
+            })
+            .then(function(user) {
+                done(null, user);
+            });
+        });
+    });
+}));
+
 passport.serializeUser(function(user, done) {
     done(null, user.username);
 });
