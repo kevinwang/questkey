@@ -49,6 +49,14 @@ module.exports = function(sequelize, DataTypes) {
             },
             experiencePercentage: function() {
                 return 100.0 * this.getDataValue('experience') / this.experienceForLevel;
+            },
+            title: function() {
+                var level = this.getDataValue('level');
+                if (level === 1) return 'Beginner';
+                else if (level < 5) return 'Slight Boon to Society';
+                else if (level < 10) return 'All Around Nice Guy';
+                else if (level < 15) return 'Quest Bridge Over Troubled Waters';
+                else return 'Stand-Up Guy';
             }
         },
         instanceMethods: {
