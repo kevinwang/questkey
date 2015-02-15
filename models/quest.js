@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
         location: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        reward: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     }, {
         classMethods: {

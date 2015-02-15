@@ -15,7 +15,8 @@ module.exports = function() {
             db.Quest.create({
                 title: 'Make me a sandwich',
                 description: 'Sudo make me a sandwich',
-                location: 'Cooper Union'
+                location: 'Cooper Union',
+                reward: 250
             })
             .then(function(quest) {
                 quest.setOwner(user);
