@@ -225,6 +225,16 @@ app.get('/u/:username/reward/:amount', ensureAuthenticated, function(req, res) {
     });
 });
 
+app.get('/leaderboard', function(req, res) {
+    db.User.findAll({order: 'level DESC'})
+    .then(function(users) {
+        res.render('leaderboard', {
+            user: req.user,
+            allUsers: users
+        });
+    });
+});
+
 app.get('/css/:filename', function(req, res) {
     res.sendFile(path.join(__dirname, 'css', req.params.filename));
 });

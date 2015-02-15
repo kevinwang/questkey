@@ -1,0 +1,14 @@
+extends ./layout.jade
+
+block leaderboardNavItem
+  li(class="active")
+    a(href="/leaderboard") Leaderboard
+
+block content
+  h1 Leaderboard
+
+  ul
+    each u in allUsers
+      li
+        img(src=u.avatarUrl, style="padding-right: 10px")
+        a(href=u.path) #{u.username} (Level #{u.level})
