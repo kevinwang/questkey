@@ -10,5 +10,6 @@ block content
   ul
     each u in allUsers
       li
-        img(src=u.avatarUrl, style="padding-right: 10px")
+        a(href=u.path)
+          img(src=u.avatarUrl, style="padding-right: 10px")
         a(href=u.path) #{u.username} (Level #{u.level})
