@@ -244,10 +244,10 @@ function ensureAuthenticated(req, res, next) {
     return res.redirect('/login');
 }
 
-db.sequelize.sync({force: true})
+db.sequelize.sync()
 .then(function(err) {
     require('./seed-db')();
-    app.listen(4000);
+    app.listen(4001);
 })
 .catch(function(err) {
     throw err[0];
